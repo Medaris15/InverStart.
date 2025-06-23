@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Negocio</title>
+  <link rel="icon" href="./img/logo.jpeg">
+  <script src="./js/tu_negocio.js"></script>
+  <link rel="stylesheet" href="./css/tu_negocio.css">
+  <script type="module" src="./js/firebaseConfig.js"></script>
+  
+</head>
+<body>
+  <header>
+    <div class="header-left">
+        <h1>InverStart</h1>
+    </div>
+    <div class="header-right">
+        <a href="ajustes.html" title="Ayuda"><img src="img/help.png" alt="Ayuda"></a>
+    </div>
+</header>
+<nav>
+    <ul>
+        <li><a href="tu_negocio.html">Tu negocio</a></li>
+        <li><a href="inversionistas.html">Inversionistas</a></li>
+        <li><a href="Perfil_Emprendedor.html">Perfil</a></li>
+    </ul>
+</nav>
+
+<main>
+  <div class="profile-header">
+      <img class="profile-banner" src="img/banner.jpg" alt="Banner por defecto">
+      <img class="profile-picture" src="img/perfil.jpg" alt="Foto de perfil por defecto">
+      <input type="file" id="profileInput" accept="image/*" style="display: none;">
+      <button onclick="changeProfilePicture()">Cambiar foto</button>
+      
+  </div>
+</main>
+<center>
+<p class="profile-name">Panadería Rey</p>
+</center>
+
+<section id="desc" class="tabcontent" style="display: block;">
+            <form id="formNegocio">
+                <label for="eslogan">Eslogan</label>
+                <input type="text" id="eslogan" name="eslogan"/>
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+                <button type="button" onclick="guardarNegocio()">Guardar cambios</button>
+            </form>
+            <!-- Fotos/Videos -->
+            <div class="media-section">
+                <label for="fotosVideos">Fotos o Videos</label>
+                <input type="file" id="fotosVideos" accept="image/*,video/*" multiple/>
+                <button id="btnSubirMedia" type="button">Subir Archivos</button>
+                <div id="galeriaMedia" class="galeria-media"></div>
+            </div>
+            <!-- Presupuesto -->
+            <div class="presupuesto-section">
+                <label for="presupuestoDoc">Presupuesto del negocio</label>
+                <input type="file" id="presupuestoDoc" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv"/>
+                <button type="button" onclick="subirPresupuesto()">Subir Presupuesto</button>
+                <div id="presupuestoActual"></div>
+            </div>
+        </section>
+        <section id="resenas" class="tabcontent" style="display: none;">
+            <div id="resenasContenido">No hay reseñas aún.</div>
+        </section>
+  </div>
+</body>
+</html>

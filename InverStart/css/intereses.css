@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.register-container {
+  background: white;
+  width: 360px;
+  height: 680px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 50px;
+}
+
+h1 {
+  font-size: 1.8em;
+  color: #2e367a;
+}
+
+.logo-container p {
+  color: #2e367a;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+button {
+  padding: 12px;
+  background: #2e367a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #1d2355;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+  color: #2e367a;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+*body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #e0f2fe;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    background-color: #ffffff;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    width: 360px;
+    height: 680px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h2 {
+    color: #1e3a8a;
+    margin-bottom: 24px;
+    font-size: 22px;
+    text-align: center;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 16px;
+    color: #1e293b;
+    font-size: 15px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    font-size: 14px;
+  }
+  
+  .opciones {
+    margin-top: 6px;
+    display: flex;
+    gap: 12px;
+  }
+  
+  .opciones label {
+    font-weight: normal;
+  }
+  
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2563eb;
+  }
+  
+  @media (max-width: 500px) {
+    .container {
+      padding: 20px 15px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    button {
+      font-size: 15px;
+    }
+  }
+  body.form-body {
+    background: linear-gradient(to bottom right, #f4f4f4, #f4f4f4);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .form-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 480px;
+    width: 90%;
+  }
+  
+  .form-container h1 {
+    color: #003366;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-top: 1rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  select, input[type="checkbox"], input[type="radio"] {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .checkbox-group, .radio-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+  
+  .btn-azul {
+    margin-top: 2rem;
+    background-color: #003366;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-azul:hover {
+    background-color: #00509e;
+  }
+  

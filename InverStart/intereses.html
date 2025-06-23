@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Intereses</title>
+  <link rel="icon" href="./img/logo.jpeg">
+  <link rel="stylesheet" href="css/intereses.css" />
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script type="module" src="js/intereses.js"></script>
+
+
+</head>
+<body class="form-body">
+  <div class="form-container">
+    <h1>Cuéntenos sobre sus intereses</h1>
+    <form id="formIntereses">
+      <!-- Pregunta 1 -->
+      <label>1. ¿En qué tipo de negocios le interesa invertir?</label>
+      <select name="tipoNegocio" required>
+        <option value="">Seleccione una opción</option>
+        <option value="virtual">Virtuales</option>
+        <option value="presencial">Presenciales</option>
+        <option value="mixto">Mixtos</option>
+      </select>
+
+      <!-- Pregunta 2 -->
+      <label>2. ¿En qué sectores le gustaría invertir? (Puede elegir varios)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="sectores" value="tecnologia" /> Tecnología</label>
+        <label><input type="checkbox" name="sectores" value="alimentos" /> Alimentación y bebidas</label>
+        <label><input type="checkbox" name="sectores" value="moda" /> Moda y accesorios</label>
+        <label><input type="checkbox" name="sectores" value="educacion" /> Educación</label>
+        <label><input type="checkbox" name="sectores" value="salud" /> Salud y bienestar</label>
+        <label><input type="checkbox" name="sectores" value="finanzas" /> Servicios financieros</label>
+        <label><input type="checkbox" name="sectores" value="arte" /> Arte y entretenimiento</label>
+        <label><input type="checkbox" name="sectores" value="energia" /> Energía y medio ambiente</label>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <label>3. ¿Cuál es su rango de inversión disponible?</label>
+      <select name="rangoInversion" required>
+        <option value="">Seleccione una opción</option>
+        <option value="menos100">Menos de $100</option>
+        <option value="100-500">$100 - $500</option>
+        <option value="500-1000">$500 - $1,000</option>
+        <option value="mas1000">Más de $1,000</option>
+      </select>
+
+      <!-- Pregunta 4 -->
+      <label>4. ¿Qué nivel de riesgo está dispuesto a asumir?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="riesgo" value="bajo" required /> Bajo</label>
+        <label><input type="radio" name="riesgo" value="medio" /> Medio</label>
+        <label><input type="radio" name="riesgo" value="alto" /> Alto</label>
+      </div>
+
+      <!-- Pregunta 5 -->
+      <label>5. ¿Cuánto tiempo estaría dispuesto a mantener una inversión?</label>
+      <select name="duracion" required>
+        <option value="">Seleccione una opción</option>
+        <option value="menos3m">Menos de 3 meses</option>
+        <option value="3-6m">3 a 6 meses</option>
+        <option value="6m-1a">6 meses a 1 año</option>
+        <option value="mas1a">Más de 1 año</option>
+      </select>
+
+      <!-- Pregunta 6 -->
+      <label>6. ¿Qué tan involucrado desea estar en los proyectos?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="involucramiento" value="pasivo" required /> Solo quiero informes</label>
+        <label><input type="radio" name="involucramiento" value="voz" /> Tener voz en decisiones</label>
+        <label><input type="radio" name="involucramiento" value="mentor" /> Ser mentor o asesor</label>
+      </div>
+
+      <!-- Pregunta 7 -->
+      <label>7. ¿Con qué frecuencia desea recibir oportunidades de inversión?</label>
+      <select name="frecuencia" required>
+        <option value="">Seleccione una opción</option>
+        <option value="diario">Diario</option>
+        <option value="semanal">Semanal</option>
+        <option value="mensual">Mensual</option>
+        <option value="coincidentes">Solo cuando coincidan con mis intereses</option>
+      </select>
+
+      <!-- Botón -->
+      <button type="submit" class="btn-azul">Guardar intereses</button>
+    </form>
+  </div>
+
+</body>
+</html>

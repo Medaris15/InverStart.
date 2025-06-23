@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Estilos básicos -->
+       <link rel="icon" href="./img/logo.jpeg">
+    <link rel="stylesheet" href="styles.css"/>
+    <!-- Firebase -->
+    <script type="module" src="./firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+</head>
+<body>
+    <header>
+        <h2>Inversión de inicio</h2>
+        <nav>
+            <ul>
+                <li><a href="tu_negocio.html">Tu negocio</a></li>
+                <li><a href="inversionistas.html">Inversionistas</a></li>
+                <li><a href="#" class="active">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="perfil-container">
+            <!-- Foto de perfil editable -->
+            <div class="foto-perfil">
+                <label for="fotoPerfilInput" class="foto-perfil-label" title="Cambiar foto de perfil">
+                    <span class="icono-editar">
+                        <svg width="28" height="28" fill="#00254d" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6" fill="#fff" stroke="#00254d" stroke-width="2"/><circle cx="12" cy="8" r="5.2" fill="#fff" stroke="#00254d" stroke-width="1.5"/><path d="M12 14c-4.2 0-8 2.1-8 4v2h16v-2c0-1.9-3.8-4-8-4z" fill="#fff" stroke="#00254d" stroke-width="2"/><path d="M16.5 21.5l4-4M20.5 20.5l-4-4" stroke="#00254d" stroke-width="1.5"/></svg>
+                    </span>
+                    <img id="fotoPerfilImg" src="default_profile.jpg" alt="Foto de perfil"/>
+                </label>
+                <input type="file" id="fotoPerfilInput" accept="image/*" style="display:none"/>
+            </div>
+            <!-- Nombre de usuario (no editable, de Firebase) -->
+            <div class="info-usuario">
+                <h3 id="nombreUsuario">
+                    <span></span>
+                    <span class="icono-editar" title="No editable">
+                        <svg width="19" height="19" fill="#00254d" viewBox="0 0 24 24"><path d="M16.3 3.3l4.4 4.4c.4.4.4 1 0 1.4L6.7 23H2v-4.7L15.6 3.3c.4-.4 1-.4 1.4 0zM4 20h1.2l11.6-11.6-1.2-1.2L4 18.8V20z"/></svg>
+                    </span>
+                </h3>
+            </div>
+            <!-- Correo (no editable, de la base de datos) -->
+            <div class="correo-section">
+                <label for="correoUsuario">Correo</label>
+                <input type="email" id="correoUsuario" readonly />
+            </div>
+            <!-- Cuenta de PayPal editable -->
+            <div class="paypal-section">
+                <label for="paypalInput">Cuenta de PayPal</label>
+                <input type="email" id="paypalInput" placeholder="correo@paypal.com"/>
+                <button id="guardarPaypalBtn" class="btn btn-paypal">Guardar</button>
+                <div id="paypalGuardado" style="color:green;font-size:0.96em;display:none;">¡Guardado!</div>
+            </div>
+            <!-- Editar negocio -->
+            <div class="editar-negocio">
+                <a href="tu_negocio.html">Editar negocio</a>
+            </div>
+            <!-- Botón cerrar sesión -->
+            <button class="btn cerrar-sesion" id="cerrarSesionBtn">Sesión cerrada</button>
+            <!-- Botón eliminar cuenta -->
+            <button class="btn eliminar-cuenta" id="eliminarCuentaBtn">Eliminar cuenta</button>
+        </div>
+    </main>
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+        import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { app } from './firebase-config.js';
+
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+        const auth = getAuth(app);
+
+        let negocioId = "";
+
+        // Mostrar información de usuario
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                negocioId = user.uid;
+                // Nombre y correo
+                document.querySelector("#nombreUsuario span").textContent = user.displayName || "Nombre de usuario";
+                document.getElementById("correoUsuario").value = user.email || "";
+                // Foto de perfil
+                cargarFotoPerfil(user.uid);
+
+                // PayPal
+                const docRef = doc(db, "negocios", user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById("paypalInput").value = data.paypal || "";
+                }
+            }
+        });
+
+        // Cambiar foto de perfil
+        document.getElementById("fotoPerfilInput").addEventListener("change", async function(e){
+            const file = e.target.files[0];
+            if (!file || !auth.currentUser) return;
+            const fileRef = ref(storage, `usuarios/${auth.currentUser.uid}/perfil.jpg`);
+            await uploadBytes(fileRef, file);
+            const url = await getDownloadURL(fileRef);
+            document.getElementById("fotoPerfilImg").src = url;
+            // Guarda la URL en Firestore
+            const docRef = doc(db, "negocios", auth.currentUser.uid);
+            await updateDoc(docRef, { fotoPerfilURL: url });
+        });
+
+        async function cargarFotoPerfil(uid){
+            // Intenta cargar de Firestore, si no usa el default
+            const docRef = doc(db, "negocios", uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if (data.fotoPerfilURL)
+                    document.getElementById("fotoPerfilImg").src = data.fotoPerfilURL;
+            }
+        }
+
+        // Guardar correo de PayPal
+        document.getElementById("guardarPaypalBtn").addEventListener("click", async function(e){
+            e.preventDefault();
+            if (!auth.currentUser) return;
+            const valor = document.getElementById("paypalInput").value.trim();
+            const docRef = doc(db, "negocios", auth.currentUser.uid);
+            await updateDoc(docRef, { paypal: valor });
+            document.getElementById("paypalGuardado").style.display = "block";
+            setTimeout(() => document.getElementById("paypalGuardado").style.display = "none", 1800);
+        });
+
+        // Cerrar sesión
+        document.getElementById("cerrarSesionBtn").addEventListener("click", async function(){
+            await signOut(auth);
+            window.location.href = "login.html";
+        });
+
+        // Eliminar cuenta (elimina usuario de Auth, Firestore y Storage)
+        document.getElementById("eliminarCuentaBtn").addEventListener("click", async function(){
+            if(!auth.currentUser) return;
+            if(!confirm("¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.")) return;
+
+            const uid = auth.currentUser.uid;
+            // Elimina datos de Firestore
+            await deleteDoc(doc(db, "negocios", uid));
+            // Elimina foto de perfil de Storage
+            try {
+                await deleteObject(ref(storage, `usuarios/${uid}/perfil.jpg`));
+            } catch(e){}
+            // Elimina usuario de Auth
+            try {
+                await deleteUser(auth.currentUser);
+                alert("Cuenta eliminada.");
+                window.location.href = "login.html";
+            } catch(e){
+                alert("Error al eliminar la cuenta. Vuelve a iniciar sesión y vuelve a intentarlo.");
+            }
+        });
+    </script>
+    <style>
+        body { font-family: sans-serif; background: #f6f8fa; margin: 0; }
+        header { background: #f2f4f8; padding: 8px 16px; border-bottom: 1px solid #e9e9e9; }
+        nav ul { list-style: none; display: flex; gap: 1em; padding: 0; margin: 0; }
+        nav ul li a { text-decoration: none; color: #00254d; }
+        nav ul li a.active { font-weight: bold; border-bottom: 2px solid #00254d; }
+        .perfil-container {
+            background: #fff;
+            max-width: 370px;
+            margin: 1.5em auto;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px #00254d18;
+            padding: 24px 12px 40px 12px;
+            text-align: center;
+        }
+        .foto-perfil {
+            position: relative;
+            width: 104px;
+            margin: 0 auto 0.5em auto;
+        }
+        .foto-perfil-label {
+            cursor: pointer;
+            display: block;
+            width: 104px;
+            height: 104px;
+        }
+        #fotoPerfilImg {
+            width: 104px; height: 104px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #00254d;
+            background: #fff;
+        }
+        .icono-editar {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background: #fff;
+            border-radius: 50%;
+            padding: 3px;
+            border: 2px solid #00254d;
+        }
+        .info-usuario h3 {
+            font-size: 1.3em;
+            color: #00254d;
+            margin: 0.4em 0 0.2em 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4em;
+        }
+        .correo-section {
+            margin: 1em 0 1.1em 0;
+        }
+        .correo-section label {
+            display: block;
+            color: #00254d;
+            font-weight: 600;
+            font-size: 1.04em;
+            margin-bottom: 0.2em;
+        }
+        #correoUsuario {
+            width: 85%;
+            padding: 7px;
+            font-size: 1em;
+            border: 1.5px solid #ccc;
+            border-radius: 6px;
+            background: #f8fafd;
+            color: #00254d;
+            text-align: center;
+        }
+        .paypal-section label {
+            display: block;
+            font-size: 1.07em;
+            color: #00254d;
+            font-weight: 600;
+            margin-bottom: 0.4em;
+        }
+        #paypalInput {
+            width: 85%;
+            padding: 7px;
+            font-size: 1em;
+            border: 1.5px solid #00254d;
+            border-radius: 6px;
+            background: #f8fafd;
+            color: #00254d;
+            text-align: center;
+        }
+        .btn-paypal {
+            margin-top: 0.6em;
+            background: #045293;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 7px 18px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .editar-negocio {
+            margin-bottom: 1.5em;
+        }
+        .editar-negocio a {
+            color: #00254d;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 1.08em;
+        }
+        .btn {
+            width: 85%;
+            padding: 13px 0;
+            font-size: 1.07em;
+            border: none;
+            border-radius: 10px;
+            margin: 0.7em 0 0.3em 0;
+            font-weight: bold;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+        }
+        .cerrar-sesion {
+            background: #045293;
+            color: #fff;
+        }
+        .eliminar-cuenta {
+            background: #d9534f;
+            color: #fff;
+        }
+        @media (max-width: 500px) {
+            .perfil-container { max-width: 98vw; }
+        }
+    </style>
+</body>
+</html>

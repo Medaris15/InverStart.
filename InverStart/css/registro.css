@@ -1,0 +1,100 @@
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .register-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #e6f3ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .register-container {
+    background: white;
+    width: 360px;
+    height: 850px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-container {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .logo {
+    width: 70px;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  h1{
+    font-size: 1.8em;
+    color: white;
+    background:#2e367a ;
+    width: 360px;
+      padding: 25px 0;
+    }
+  
+  .logo-container p {
+    color: #2e367a;
+    font-weight: 500;
+    margin-top: 5px;
+  }
+  
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    padding: 12px;
+    background: #2e367a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background: #1d2355;
+  }
+  
+  .login-link {
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+    color: #2e367a;
+    text-decoration: none;
+    font-size: 0.95em;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  

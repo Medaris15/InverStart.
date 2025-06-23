@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Proyecto</title>
+  <link rel="icon" href="./img/logo.jpeg">
+  <link rel="stylesheet" href="./css/form.css">
+  <script type="module" src="./js/firebaseConfig.js"></script>
+  <script type="module" src="./js/formEmprendedor.js"></script>
+
+</head>
+<body> 
+
+  <div class="form-container">
+    <h2>Registra tu Proyecto o Emprendimiento</h2>
+
+    <form id="proyectoForm">
+      <label for="nombre">Nombre del negocio</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="descripcionCorta">Descripción Corta</label>
+      <input type="text" id="descripcionCorta" name="descripcionCorta" maxlength="120" required>
+
+      <label for="descripcionLarga">Descripción Detallada</label>
+      <textarea id="descripcionLarga" name="descripcionLarga" rows="5" required></textarea>
+
+      <label for="correo">Correo electronico</label>
+      <input type="text" id="correo" name="correo" required>
+
+      <label for="numero">Numero personal o empresarial</label>
+      <input type="number" id="numero" name="numero" required>
+
+      <label for="categoria">Rubro del negocio</label>
+      <select id="categoria" name="categoria" required>
+        <option value="">Seleccione el rubro del negocio</option>
+        <option value="tecnologia">Tecnología</option>
+        <option value="moda">Moda</option>
+        <option value="belleza">Belleza</option>
+        <option value="salud">Salud y bienestar </option>
+        <option value="arte">Arte</option>
+        <option value="educacion">Educación</option>
+        <option value="gastronomia">Gastronomía</option>
+        <option value="otro">Otro</option>
+      </select>
+
+      <label for="modalidad">Modalidad del negocio</label>
+      <select id="modalidad" name="modalidad" required>
+        <option value="">Seleccione la modalidad del negocio</option>
+        <option value="presencial">Presencial</option>
+        <option value="virtual">Virtual</option>
+        <option value="semi">Semipresencial</option>
+      </select>
+
+      <div id="ubicacion-container" style="display: none;">
+        <label for="ubicacion">Ubicación del negocio</label>
+        <input type="text" id="ubicacion" name="ubicacion" required>
+      </div>
+
+      <label for="imagen">Imágenes del negocio</label>
+      <input type="file" id="imagen" name="imagen" accept="image/*" multiple>
+
+      <label for="logo">Logo del negocio</label>
+      <input type="file" id="logo" name="logo" accept="image/*">
+
+      <label for="potencial">Potencial de Crecimiento del negocio</label>
+        <select id="potencial" name="potencial" required>
+          <option value="alto">Alto (expansión rápida y alta demanda)</option>
+          <option value="medio">Medio (crecimiento estable pero competitivo)</option>
+          <option value="bajo">Bajo (mercado limitado, crecimiento lento)</option>
+        </select>
+
+      <label for="ingresos">Ingresos monetarios mensuales  del negocio</label>
+      <input type="number" id="ingresos" name="ingresos" step="0.01" required>
+
+      <label for="egresos">Egresos monetarios mensuales del negocio</label>
+      <input type="number" id="egresos" name="egresos" step="0.01" required>
+
+      <input type="hidden" id="margen_ganancia" name="margen_ganancia">
+
+      <button type="submit">Publicar</button>
+    </form>
+  </div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio</title>
+  <link rel="icon" href="./img/logo.jpeg">
+  <link rel="stylesheet" href="./css/Inicio_Inversonista.css" />
+  <script type="module" src="./js/Inicio_Inversionista.js" defer></script>
+</head>
+<body>
+  <!-- Pantalla de carga -->
+  <div id="loader">
+    <div id="loader-text">
+      <h2>InverStart</h2>
+      <p>Tu idea, nuestra inversión...</p>
+      <small>Cargando, por favor espera</small>
+    </div>
+  </div>
+
+  <div class="phone-container">
+    <header>
+      <h1>InverStart</h1>
+      <div class="search-wrapper">
+        <!-- BARRA DE BÚSQUEDA -->
+<div class="search-bar">
+  <input type="text" id="search" placeholder="¿En qué quieres invertir?" />
+  <button id="toggleDropdown">🔍</button>
+</div>
+
+<!-- CATEGORÍAS (OCULTAS HASTA CLIC EN LA LUPA) -->
+<div id="categoryDropdown" class="category-dropdown">
+  <button data-categoria="todos">Todos</button>
+  <button data-categoria="tecnologia">Tecnología</button>
+  <button data-categoria="moda">Moda</button>
+  <button data-categoria="educación">Educación</button>
+  <button data-categoria="belleza">Belleza</button>
+  <button data-categoria="arte">Arte</button>
+  <button data-categoria="ropa">Ropa</button>
+  <button data-categoria="otros">Otros</button>
+</div>
+
+<!-- CONTENEDOR DE PROYECTOS -->
+<div id="proyectos-container" class="proyectos-container">
+  <!-- Las tarjetas se insertan aquí -->
+</div>
+
+
+    <nav class="bottom-nav">
+      <button onclick="window.location.href='paraTi.html'">❤</button>
+      <button class="home">🏠</button>
+      <button onclick="window.location.href='Perfil_Inversionista'">👤</button>
+    </nav>
+  </div>
+
+    <!-- Script para ocultar loader -->
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("main-content").style.display = "flex";
+      }, 1200); // puedes subir o bajar el tiempo de carga
+    });
+  </script>
+
+</body>
+</html>

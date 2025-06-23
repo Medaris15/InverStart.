@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar contraseña</title>
+  <link rel="icon" href="./img/logo.jpeg">
+
+  <link rel="stylesheet" href="./css/forgot-password.css">
+  <script type="module" src="./js/forgot-password.js"></script>
+  <script type="module" src="./js/firebaseConfig.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Recuperar contraseña</h2>
+
+    <input type="email" id="email" placeholder="Correo electrónico" required />
+    <button id="btnRecuperar">Enviar correo de recuperación</button>
+
+    <p id="mensaje"></p>
+  </div>
+
+  <!-- Modal emergente -->
+   <center>
+  <div id="modalCorreo" class="modal">
+    <div class="modal-content">
+      <h2>¡Correo enviado!</h2>
+      <p>Le hemos enviado un enlace para recuperar su contraseña.<br>Por favor revise su correo.</p>
+      <button onclick="cerrarModalYRedirigir()">Aceptar</button>
+    </div>
+  </div> 
+</center>
+
+</body>
+</html>

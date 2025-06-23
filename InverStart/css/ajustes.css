@@ -1,0 +1,141 @@
+/* ajustes.css */
+
+/*responsive en css*/
+@media screen and (min-width: 100px) {
+    .content {
+    width: 90%;
+    max-width: 1200px; /* Más grande en pantallas grandes */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+  }
+  
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f4f4f4, #f4f4f4);
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #003d99;
+}
+
+header button {
+  background-color: #0059cc;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+header button:hover {
+  background-color: #004c99;
+}
+
+main {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 61, 153, 0.15);
+  width: 100%;
+  max-width: 600px;
+}
+
+main section {
+  margin-bottom: 25px;
+}
+
+main section h2 {
+  color: #0059cc;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #99c2ff;
+  padding-bottom: 6px;
+}
+
+main section p,
+main section ul,
+main section details p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+main section ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+details {
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 1px solid #b3d1ff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #f0f8ff;
+  transition: background-color 0.3s ease;
+}
+
+details[open] {
+  background-color: #d6eaff;
+}
+
+details summary {
+  font-weight: 600;
+  color: #004c99;
+  outline: none;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #003d99;
+  text-decoration: underline;
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  body {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: 20px;
+  }
+}

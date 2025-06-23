@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio de Sesión</title>
+  <link rel="icon" href="./img/logo.jpeg">
+
+  <link rel="stylesheet" href="./css/Index.css">
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script type="module" src="js/Index.js"></script>
+
+  <!-- Fuente Cal Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap" rel="stylesheet" />
+
+</head>
+<body>
+
+  <!-- Pantalla de carga -->
+  <div id="loader">
+    <div id="loader-text">
+      <h2>InverStart</h2>
+      <p>Tu idea, nuestra inversión...</p>
+      <small>Cargando, por favor espera</small>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div id="main-content">
+    <div class="login-container">
+      <div class="logo-container">
+        <img src="./img/logo.jpeg" alt="Logo" class="logo">
+        <h1>InverStart</h1>
+        <p>Tú idea, nuestra inversión</p>
+      </div>
+
+      <form id="login-form">
+        <input type="email" id="correo" placeholder="Email" required>
+        <input type="password" id="contrasena" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+        <a href="restaurar_contrseña.html" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
+        <a href="registro.html" class="registro-link">¿No tienes cuenta? Regístrate</a>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script type="module" src="js/Index.js"></script>
+
+  <!-- Script para ocultar loader -->
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("main-content").style.display = "flex";
+      }, 1200); // puedes subir o bajar el tiempo de carga
+    });
+  </script>
+</body>
+</html>
